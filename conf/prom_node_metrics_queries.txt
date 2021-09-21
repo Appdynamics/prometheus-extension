@@ -1,0 +1,3 @@
+node_network_receive_bytes_total
+node_disk_read_bytes_total
+kube_node_status_capacity

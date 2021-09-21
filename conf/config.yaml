@@ -1,0 +1,26 @@
+!!com.appdynamics.cloud.prometheus.config.ServiceConfig
+
+debugLogging: false
+eventsServiceEndpoint: ""
+eventsServiceApikey: ""
+controllerGlobalAccount: ""
+prometheusUrl: "http://localhost:9090/api/v1/query"
+authenticationMode: "none"    # options are ( none | awssigv4 )
+awsRegion: ""            # mandatory if authenticationMode = awssigv4
+awsAccessKey: ""                  # mandatory if authenticationMode = awssigv4
+awsSecretKey: ""                  # mandatory if authenticationMode = awssigv4
+  
+analyticsEventsSources:
+  - schemaName: "prom_node_metrics"
+    schemaDefinitionFilePath: "./conf/prom_node_metrics_schema.txt"
+    queriesTextFilePath: "./conf/prom_node_metrics_queries.txt"
+    eventsSourceClass: "com.appdynamics.cloud.prometheus.analytics.PrometheusEventsSource"
+    executionInterval: "1"  # executionInterval (is in minutes, whole numbers only)
+
+  - schemaName: "prom_kubelet_metrics"
+    schemaDefinitionFilePath: "./conf/prom_kubelet_metrics_schema.txt"
+    queriesTextFilePath: "./conf/prom_kubelet_metrics_queries.txt"
+    eventsSourceClass: "com.appdynamics.cloud.prometheus.analytics.PrometheusEventsSource"
+    executionInterval: "1"  # executionInterval (is in minutes, whole numbers only)
+
+

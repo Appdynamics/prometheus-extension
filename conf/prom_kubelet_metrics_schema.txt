@@ -1,0 +1,5 @@
+metric_name,string
+instance,string
+job,string
+kubernetes_io_hostname,string
+metric_value,float
