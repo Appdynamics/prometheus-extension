@@ -22,7 +22,7 @@ Responses are then parsed and then passed to [AppDynamics](https://www.appdynami
 
 ## Installation
 
-### Clone package
+### Clone repository
 
 ```
 $ git clone https://github.com/Appdynamics/prometheus-extension.git
@@ -105,7 +105,9 @@ executionInterval | The interval in minutes that the PromQL queries will be exec
 
 ### Configure a Schema for an event source
 
-To be able to publish Prometheus data to AppDynamics, a custom schema needs to be created in your controller for each event source. The schema must match the data types of your Prometheus data. The two default event sources configurations (`prom_node_metrics` and `prom_kubelet_metrics`) each have a schema definition file (`./conf/prom_node_metrics_schema.txt` and `./conf/prom_kubelet_metrics_schema.txt`) that matches the data returned from the queries in their associated queries text files `./conf/prom_node_metrics_queries.txt` and `./conf/prom_kubelet_metrics_queries.txt`.
+To be able to publish Prometheus data to AppDynamics, a custom schema needs to be created in your controller for each event source. The schema must match the data types of your Prometheus data. 
+
+The two default event sources configurations (`prom_node_metrics` and `prom_kubelet_metrics`) each have a schema definition file (`./conf/prom_node_metrics_schema.txt` and `./conf/prom_kubelet_metrics_schema.txt`) that matches the data returned from the queries in their associated queries text files `./conf/prom_node_metrics_queries.txt` and `./conf/prom_kubelet_metrics_queries.txt`.
 
 Let's use the `prom_node_metrics` events source configuration in this example.
 
