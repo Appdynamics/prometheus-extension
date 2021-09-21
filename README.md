@@ -156,10 +156,10 @@ Once you have added your queries you should ensure that your schema config match
 
 ## Run Extension
 
-Change to the directory where you have installed the extension (e.g. `prometheus-extension`)
+Change to the directory where you have installed the extension (e.g. `prometheus-extension`) then use the commands below to start the extension.
 
 ```
-chmod +x run_service.sh
+$ chmod +x run_service.sh
 $ ./run_service.sh
 ```
 
