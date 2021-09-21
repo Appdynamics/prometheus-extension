@@ -1,6 +1,6 @@
 package com.appdynamics.cloud.awsamp;
 
-class AppDAwsAmpApplicationTests {
+class AppdPrometheusApplicationTests {
 
 
 	void contextLoads() {

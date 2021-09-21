@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.appdynamics.cloud.prometheus</groupId>
-	<artifactId>AppD-Prometheus</artifactId>
+	<artifactId>AppD-Prometheus-Extension</artifactId>
 	<version>1.0.0</version>
-	<name>AppD-Prometheus</name>
+	<name>AppD-Prometheus-Extension</name>
 	<description>AppDynamics integration with Prometheus</description>
 	<properties>
 		<java.version>1.8</java.version>
