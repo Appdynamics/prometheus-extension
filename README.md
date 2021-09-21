@@ -25,8 +25,8 @@ Responses are then parsed and then passed to [AppDynamics](https://www.appdynami
 ### Clone package
 
 ```
-$ git clone https://github.com/james201010/prometheus-appd.git
-$ cd prometheus-app
+$ git clone https://github.com/Appdynamics/prometheus-extension.git
+$ cd prometheus-extension
 ```
 
 ## Configuration
@@ -156,9 +156,10 @@ Once you have added your queries you should ensure that your schema config match
 
 ## Run Extension
 
-Change to the directory where you have installed the extension (e.g. `prometheus-app`)
+Change to the directory where you have installed the extension (e.g. `prometheus-extension`)
 
 ```
+chmod +x run_service.sh
 $ ./run_service.sh
 ```
 
