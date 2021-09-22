@@ -1,4 +1,4 @@
-package com.appdynamics.cloud.awsamp;
+package com.appdynamics.cloud.prometheus;
 
 class AppdPrometheusApplicationTests {
 
