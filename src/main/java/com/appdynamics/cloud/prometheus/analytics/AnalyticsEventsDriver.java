@@ -34,7 +34,7 @@ public class AnalyticsEventsDriver implements Runnable, AnalyticsEventsPublisher
 	 */
 	public AnalyticsEventsDriver(ServiceConfig serviceConfig, AnalyticsEventsSource analyticsEventsSource) {
 		
-		logr = new Logger(AnalyticsEventsDriver.class.getSimpleName(), serviceConfig.isDebugLogging());
+		logr = new Logger(AnalyticsEventsDriver.class.getSimpleName(), serviceConfig.getLoggingLevel());
 		this.serviceConfig = serviceConfig;
 		this.analyticsEventsSource = analyticsEventsSource;
 		
@@ -49,7 +49,7 @@ public class AnalyticsEventsDriver implements Runnable, AnalyticsEventsPublisher
 				
 				long startTime = Calendar.getInstance().getTimeInMillis();
 				
-				logr.info("##############################  Publishing Analytics Events for schema '" + this.analyticsEventsSource.getSchemaName() + "'  : BEGIN");
+				logr.debug("##############################  Publishing Analytics Events for schema '" + this.analyticsEventsSource.getSchemaName() + "'  : BEGIN");
 				
 				this.createSchemaIfRequired();
 				
@@ -61,16 +61,16 @@ public class AnalyticsEventsDriver implements Runnable, AnalyticsEventsPublisher
 				long minsInSecs = totalTimeMins * 60;
 				long remainingSecs = totalTimeSecs - minsInSecs;
 				
-				logr.info("##############################  Publishing Analytics Events for schema '" + this.analyticsEventsSource.getSchemaName() + "'  : END");
-				logr.info("##############################  Total Elapsed Time = " + totalTimeMins + " minutes : " + remainingSecs + " seconds");
+				logr.debug("##############################  Publishing Analytics Events for schema '" + this.analyticsEventsSource.getSchemaName() + "'  : END");
+				logr.debug("##############################  Total Elapsed Time = " + totalTimeMins + " minutes : " + remainingSecs + " seconds");
 				
 				
 				Thread.currentThread().sleep(this.analyticsEventsSource.getExecutionInterval() * 60000);
 				
-				logr.carriageReturn();
-				logr.carriageReturn();
-				//logr.carriageReturnDebug();
-				//logr.carriageReturnDebug();
+				//logr.carriageReturn();
+				//logr.carriageReturn();
+				logr.carriageReturnDebug();
+				logr.carriageReturnDebug();
 				
 			} catch (Throwable ex) {
 				ex.printStackTrace();
@@ -101,7 +101,7 @@ public class AnalyticsEventsDriver implements Runnable, AnalyticsEventsPublisher
 	    
 	    CloseableHttpResponse response = client.execute(request);
 		
-	    logr.info("Analytics Publish Response for schema '" + this.analyticsEventsSource.getSchemaName() + "' = HTTP Status: " + response.getStatusLine().getStatusCode());
+	    logr.debug("Analytics Publish Response for schema '" + this.analyticsEventsSource.getSchemaName() + "' = HTTP Status: " + response.getStatusLine().getStatusCode());
 	    
 		String resp = "";
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
@@ -114,8 +114,8 @@ public class AnalyticsEventsDriver implements Runnable, AnalyticsEventsPublisher
         resp = out.toString();
 		reader.close();
 		
-		logr.debug("Publish Events Response");
-		logr.debug(resp);
+		logr.trace("Publish Events Response");
+		logr.trace(resp);
 
 		HttpClientUtils.closeQuietly(response);
 		HttpClientUtils.closeQuietly(client);
@@ -142,8 +142,8 @@ public class AnalyticsEventsDriver implements Runnable, AnalyticsEventsPublisher
 		
 	    int statusCode = response.getStatusLine().getStatusCode();
 	    
-	    logr.debug(" - Checking for existing schema");
-	    logr.debug(" - Schema: " + this.analyticsEventsSource.getSchemaName() + " : HTTP Status: " + response.getStatusLine().getStatusCode());
+	    logr.trace(" - Checking for existing schema");
+	    logr.trace(" - Schema: " + this.analyticsEventsSource.getSchemaName() + " : HTTP Status: " + response.getStatusLine().getStatusCode());
 	    
 	    boolean exists = false;
 	    
@@ -214,8 +214,8 @@ public class AnalyticsEventsDriver implements Runnable, AnalyticsEventsPublisher
 	    
 	    CloseableHttpResponse response = client.execute(request);
 		
-	    logr.debug(" - Creating schema");
-	    logr.debug(" - Schema: " + this.analyticsEventsSource.getSchemaName() + " : HTTP Status: " + response.getStatusLine().getStatusCode());
+	    logr.trace(" - Creating schema");
+	    logr.trace(" - Schema: " + this.analyticsEventsSource.getSchemaName() + " : HTTP Status: " + response.getStatusLine().getStatusCode());
 	    
 		String resp = "";
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
@@ -228,8 +228,8 @@ public class AnalyticsEventsDriver implements Runnable, AnalyticsEventsPublisher
         resp = out.toString();
 		reader.close();
 		
-		logr.debug("Create Schema Response");
-		logr.debug(resp);
+		logr.trace("Create Schema Response");
+		logr.trace(resp);
 
 		HttpClientUtils.closeQuietly(response);
 		HttpClientUtils.closeQuietly(client);

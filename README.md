@@ -38,7 +38,7 @@ Open the the conf/config.yaml file for editing. The default configuration is bel
 ```
 !!com.appdynamics.cloud.prometheus.config.ServiceConfig
 
-debugLogging: false
+loggingLevel: "info"
 eventsServiceEndpoint: "https://analytics.api.appdynamics.com:443"
 eventsServiceApikey: ""
 controllerGlobalAccount: ""
@@ -60,7 +60,7 @@ analyticsEventsSources:
 
 Parameter | Function | Default Value
 --------- | -------- | -------------
-debugLogging | Choose to turn on debug level logging. | `false`
+loggingLevel | Choose the logging level. The options are `info` or `debug` or `trace` | `info`
 eventsServiceEndpoint | URL to connect to the AppDynamics controller events service. See [our documentation](https://docs.appdynamics.com/display/PRO45/Analytics+Events+API#AnalyticsEventsAPI-AbouttheAnalyticsEventsAPI) for the URL for your controller. | (blank)
 eventsServiceApikey | API Key to connect to AppDynamics controller events service. See [our documentation](https://docs.appdynamics.com/display/PRO45/Managing+API+Keys) to create an API key. | (blank)
 controllerGlobalAccount | Account name to connect to the AppDynamics controller. See Settings > License > Account for the value for your controller | (blank)

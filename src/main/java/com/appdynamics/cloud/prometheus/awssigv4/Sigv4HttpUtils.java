@@ -19,7 +19,7 @@ import com.appdynamics.cloud.prometheus.Logger;
  */
 public class Sigv4HttpUtils {
 
-	private static Logger logr = new Logger(Sigv4HttpUtils.class.getSimpleName(), AppdPrometheusAppListener.DEBUG_LOGGING);
+	private static Logger logr = new Logger(Sigv4HttpUtils.class.getSimpleName(), AppdPrometheusAppListener.LOGGING_LEVEL);
 	
     /**
      * Makes a http request to the specified endpoint
@@ -79,13 +79,13 @@ public class Sigv4HttpUtils {
             connection.setRequestMethod(httpMethod);
             
             if ( headers != null ) {
-            	logr.carriageReturnDebug();
-            	logr.debug("--------------------------------------------------------------------------------- Request headers begin ----------");
+            	logr.carriageReturnTrace();
+            	logr.trace("--------------------------------------------------------------------------------- Request headers begin ----------");
                 for ( String headerKey : headers.keySet() ) {
-                	logr.debug(headerKey + ": " + headers.get(headerKey));
+                	logr.trace(headerKey + ": " + headers.get(headerKey));
                     connection.setRequestProperty(headerKey, headers.get(headerKey));
                 }
-                logr.debug("--------------------------------------------------------------------------------- Request headers end ------------");
+                logr.trace("--------------------------------------------------------------------------------- Request headers end ------------");
             }
 
             connection.setUseCaches(false);

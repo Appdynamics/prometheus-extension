@@ -14,7 +14,7 @@ import com.appdynamics.cloud.prometheus.Logger;
  */
 public class Sigv4SignerForAuth extends Sigv4SignerBase {
 
-	private static Logger logr = new Logger(Sigv4SignerForAuth.class.getSimpleName(), AppdPrometheusAppListener.DEBUG_LOGGING);
+	private static Logger logr = new Logger(Sigv4SignerForAuth.class.getSimpleName(), AppdPrometheusAppListener.LOGGING_LEVEL);
 	
     public Sigv4SignerForAuth(URL endpointUrl, String httpMethod,
             String serviceName, String regionName) {
@@ -75,19 +75,19 @@ public class Sigv4SignerForAuth extends Sigv4SignerBase {
         String canonicalRequest = getCanonicalRequest(endpointUrl, httpMethod,
                 canonicalizedQueryParameters, canonicalizedHeaderNames,
                 canonicalizedHeaders, bodyHash);
-        logr.carriageReturnDebug();
-        logr.debug("--------------------------------------------------------------------------------- Canonical request begin --------");
-        logr.debug(canonicalRequest);
-        logr.debug("--------------------------------------------------------------------------------- Canonical request end ----------");
+        logr.carriageReturnTrace();
+        logr.trace("--------------------------------------------------------------------------------- Canonical request begin --------");
+        logr.trace(canonicalRequest);
+        logr.trace("--------------------------------------------------------------------------------- Canonical request end ----------");
         
         // construct the string to be signed
         String dateStamp = dateStampFormat.format(now);
         String scope =  dateStamp + "/" + regionName + "/" + serviceName + "/" + TERMINATOR;
         String stringToSign = getStringToSign(SCHEME, ALGORITHM, dateTimeStamp, scope, canonicalRequest);
-        logr.carriageReturnDebug();
-        logr.debug("--------------------------------------------------------------------------------- String to sign begin -----------");
-        logr.debug(stringToSign);
-        logr.debug("--------------------------------------------------------------------------------- String to sign end -------------");
+        logr.carriageReturnTrace();
+        logr.trace("--------------------------------------------------------------------------------- String to sign begin -----------");
+        logr.trace(stringToSign);
+        logr.trace("--------------------------------------------------------------------------------- String to sign end -------------");
         
         // compute the signing key
         byte[] kSecret = (SCHEME + awsSecretKey).getBytes();

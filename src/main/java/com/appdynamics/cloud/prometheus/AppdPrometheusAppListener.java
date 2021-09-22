@@ -31,7 +31,7 @@ public class AppdPrometheusAppListener implements ApplicationConstants, Applicat
 	private static ServiceConfig SRVCS_CONF;
 	private static List<Thread> ANALYTICS_DRIVER_THREADS;
 	
-	public static boolean DEBUG_LOGGING = false;
+	public static String LOGGING_LEVEL = "info";
 	
 	/**
 	 * 
@@ -91,9 +91,9 @@ public class AppdPrometheusAppListener implements ApplicationConstants, Applicat
 					
 					SRVCS_CONF = yaml.load(inputStream);
 					
-					logr = new Logger(AppdPrometheusAppListener.class.getSimpleName(), SRVCS_CONF.isDebugLogging());
+					logr = new Logger(AppdPrometheusAppListener.class.getSimpleName(), SRVCS_CONF.getLoggingLevel());
 					
-					DEBUG_LOGGING = SRVCS_CONF.isDebugLogging();
+					LOGGING_LEVEL = SRVCS_CONF.getLoggingLevel();
 					
 					this.initializeServices();
 					

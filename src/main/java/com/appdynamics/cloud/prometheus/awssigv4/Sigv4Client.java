@@ -16,7 +16,7 @@ import com.appdynamics.cloud.prometheus.Logger;
  */
 public class Sigv4Client {
     
-	private static Logger logr = new Logger(Sigv4Client.class.getSimpleName(), AppdPrometheusAppListener.DEBUG_LOGGING);
+	private static Logger logr = new Logger(Sigv4Client.class.getSimpleName(), AppdPrometheusAppListener.LOGGING_LEVEL);
 	
     public static String processRequest(String endpointUrlWithParms, String regionName, String awsAccessKey, String awsSecretKey, Map<String, String> queryParameters) {
         
@@ -45,10 +45,10 @@ public class Sigv4Client {
         // and call the service
         headers.put("Authorization", authorization);
         String response = Sigv4HttpUtils.invokeHttpRequest(endpointUrl, "GET", headers, null);
-        logr.carriageReturnDebug();
-        logr.debug("--------------------------------------------------------------------------------- Response content begin ---------");
-        logr.debug(response);
-        logr.debug("--------------------------------------------------------------------------------- Response content end -----------");
+        logr.carriageReturnTrace();
+        logr.trace("--------------------------------------------------------------------------------- Response content begin ---------");
+        logr.trace(response);
+        logr.trace("--------------------------------------------------------------------------------- Response content end -----------");
         
         return response;
     }

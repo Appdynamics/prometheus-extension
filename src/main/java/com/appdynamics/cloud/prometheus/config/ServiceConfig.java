@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class ServiceConfig {
 
-	private boolean debugLogging = false;
+	private String loggingLevel = "info";
     private String eventsServiceEndpoint;
     private String eventsServiceApikey;
     private String controllerGlobalAccount;
@@ -33,14 +33,14 @@ public class ServiceConfig {
 
 	
 	
-	public boolean isDebugLogging() {
-		return debugLogging;
+	public String getLoggingLevel() {
+		return this.loggingLevel;
 	}
 
 
 
-	public void setDebugLogging(boolean debugLog) {
-		this.debugLogging = debugLog;
+	public void setLoggingLevel(String logLevel) {
+		this.loggingLevel = logLevel;
 	}
 
 

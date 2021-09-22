@@ -1,6 +1,6 @@
 !!com.appdynamics.cloud.prometheus.config.ServiceConfig
 
-debugLogging: false
+loggingLevel: "info"  # options are ( info | debug | trace )
 eventsServiceEndpoint: ""
 eventsServiceApikey: ""
 controllerGlobalAccount: ""
