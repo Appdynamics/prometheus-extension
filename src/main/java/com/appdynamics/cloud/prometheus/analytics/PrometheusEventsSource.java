@@ -230,7 +230,7 @@ public class PrometheusEventsSource implements AnalyticsEventsSource, Applicatio
 		}
 		
 		
-		logr.info(queryResults.replaceAll("[\n\r]", ""));
+		logr.debug(queryResults.replaceAll("[\n\r]", ""));
 		
 		return queryResults;
 	}

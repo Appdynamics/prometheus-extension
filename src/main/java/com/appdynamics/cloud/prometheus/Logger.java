@@ -37,7 +37,10 @@ public class Logger {
 	}
 	
 	public void info(String msg) {
-		this.log(this.clazzName + "|INFO|" + msg);
+		//if (this.debug) { 
+			this.log(this.clazzName + "|INFO|" + msg);
+		//}
+		
 	}
 
 	public void debug(String msg) {
