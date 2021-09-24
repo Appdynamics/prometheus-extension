@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -19,9 +20,14 @@ import org.apache.http.impl.client.HttpClients;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicSessionCredentials;
+import com.amazonaws.util.EC2MetadataUtils;
+import com.amazonaws.util.EC2MetadataUtils.IAMSecurityCredential;
 import com.appdynamics.cloud.prometheus.ApplicationConstants;
 import com.appdynamics.cloud.prometheus.Logger;
 import com.appdynamics.cloud.prometheus.awssigv4.Sigv4Client;
+import com.appdynamics.cloud.prometheus.awssigv4.TestClient;
 import com.appdynamics.cloud.prometheus.config.AnalyticsEventsSourceConfig;
 import com.appdynamics.cloud.prometheus.config.ServiceConfig;
 import com.appdynamics.cloud.prometheus.utils.StringUtils;
@@ -38,6 +44,8 @@ public class PrometheusEventsSource implements AnalyticsEventsSource, Applicatio
 	private Map<String, String> schemaMap;
 	private static Logger logr;
 	
+	private Map<String, IAMSecurityCredential> awsCreds = null;
+	private AWSCredentials awsCredentials = null;
 	
 	/**
 	 * 
@@ -80,6 +88,34 @@ public class PrometheusEventsSource implements AnalyticsEventsSource, Applicatio
 	@Override
 	public void timeToPublishEvents(AnalyticsEventsPublisher publisher) throws Throwable {
 		
+		String authMode = serviceConfig.getAuthenticationMode();
+		if (authMode == null) {
+			authMode = "";
+		}
+		
+		if (authMode.equals(AUTH_MODE_AWSSIGV4)) {
+		    this.awsCreds = EC2MetadataUtils.getIAMSecurityCredentials();
+		    IAMSecurityCredential awsIamCredential = null;
+		    Set<String> credKeys = this.awsCreds.keySet();
+		    
+		    logr.carriageReturnInfo();
+		    logr.carriageReturnInfo();
+		    for (String credKey : credKeys) {
+		    	logr.info("AWS Role = " + credKey);
+		    	awsIamCredential = this.awsCreds.get(credKey);
+		    	
+		    	logr.info("AWS Access Key = '" + awsIamCredential.accessKeyId + "'");
+		    	logr.info("AWS Secret Key = '" + awsIamCredential.secretAccessKey + "'");
+		    	logr.info("AWS Session Token = '" + awsIamCredential.token + "'");
+		    	
+		    	awsCredentials = new BasicSessionCredentials(awsIamCredential.accessKeyId, awsIamCredential.secretAccessKey, awsIamCredential.token);
+		    	
+		    	logr.carriageReturnInfo();
+		    }
+		    logr.carriageReturnInfo();
+		    logr.carriageReturnInfo();
+			
+		}
 		
 		String[] promQueries = this.getPromQueriesFromFile();
 
@@ -278,7 +314,7 @@ public class PrometheusEventsSource implements AnalyticsEventsSource, Applicatio
 		String restEndpoint = this.constructEndpointQuery(promQl);
 		Map<String, String> queryParameters = new HashMap<String, String>();
 		queryParameters.put("query", promQl);
-	    
+		
 		logr.carriageReturnTrace();
 		logr.carriageReturnTrace();
 		logr.trace("****************************************************************************************************************************************************************************************");
@@ -286,7 +322,17 @@ public class PrometheusEventsSource implements AnalyticsEventsSource, Applicatio
 	    logr.trace(" - Query: " + promQl);
 	    logr.trace("****************************************************************************************************************************************************************************************");
 	    
-		return Sigv4Client.processRequest(restEndpoint, this.serviceConfig.getAwsRegion(), this.serviceConfig.getAwsAccessKey(), this.serviceConfig.getAwsSecretKey(), queryParameters);
+	    
+	    
+//    	logr.info("AWS Access Key = '" + this.awsCredential.accessKeyId + "'");
+//    	logr.info("AWS Secret Key = '" + this.awsCredential.secretAccessKey + "'");	    
+//		return Sigv4Client.processRequest(restEndpoint, this.serviceConfig.getAwsRegion(), this.awsCredential.accessKeyId, this.awsCredential.secretAccessKey, queryParameters);
+		 
+		// awsCredentials
+	    
+	    return TestClient.processRequest(restEndpoint, this.serviceConfig.getAwsRegion(), this.awsCredentials);
+	    
+		//return Sigv4Client.processRequest(restEndpoint, this.serviceConfig.getAwsRegion(), this.serviceConfig.getAwsAccessKey(), this.serviceConfig.getAwsSecretKey(), queryParameters);
 		
 	}
 	
