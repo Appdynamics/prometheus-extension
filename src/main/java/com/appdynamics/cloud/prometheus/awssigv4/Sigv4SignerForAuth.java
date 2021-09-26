@@ -47,7 +47,8 @@ public class Sigv4SignerForAuth extends Sigv4SignerBase {
                                    Map<String, String> queryParameters,
                                    String bodyHash,
                                    String awsAccessKey,
-                                   String awsSecretKey) {
+                                   String awsSecretKey,
+                                   String awsSessionToken) {
         // first get the date and time for the subsequent request, and convert
         // to ISO 8601 format for use in signature generation
         Date now = new Date();
@@ -55,6 +56,7 @@ public class Sigv4SignerForAuth extends Sigv4SignerBase {
 
         // update the headers with required 'x-amz-date' and 'host' values
         headers.put("x-amz-date", dateTimeStamp);
+        headers.put("X-Amz-Security-Token", awsSessionToken);
         
         String hostHeader = endpointUrl.getHost();
         int port = endpointUrl.getPort();

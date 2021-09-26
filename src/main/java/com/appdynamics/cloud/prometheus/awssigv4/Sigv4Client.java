@@ -18,7 +18,7 @@ public class Sigv4Client {
     
 	private static Logger logr = new Logger(Sigv4Client.class.getSimpleName(), AppdPrometheusAppListener.LOGGING_LEVEL);
 	
-    public static String processRequest(String endpointUrlWithParms, String regionName, String awsAccessKey, String awsSecretKey, Map<String, String> queryParameters) {
+    public static String processRequest(String endpointUrlWithParms, String regionName, String awsAccessKey, String awsSecretKey, String awsSessionToken, Map<String, String> queryParameters) {
         
         // the region-specific endpoint to the target object expressed in path style
         URL endpointUrl;
@@ -39,7 +39,8 @@ public class Sigv4Client {
         											   queryParameters, // no query parameters
                                                        Sigv4SignerBase.EMPTY_BODY_SHA256, 
                                                        awsAccessKey, 
-                                                       awsSecretKey);
+                                                       awsSecretKey,
+                                                       awsSessionToken);
                 
         // place the computed signature into a formatted 'Authorization' header
         // and call the service
