@@ -5,7 +5,7 @@
 
 This extension connects to a Prometheus endpoint and runs the specified queries.
 Responses are then parsed and then passed to [AppDynamics](https://www.appdynamics.com) as analytics events.
-[AWS AMP](https://us-west-2.console.aws.amazon.com/prometheus/home) (Amazon Managed Service for Prometheus) is supported using the [AWS Signature Version 4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) signing process.
+[Amazon Managed Service for Prometheus (AMP)](https://us-west-2.console.aws.amazon.com/prometheus/home)  is supported using the [AWS Signature Version 4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) signing process.
 
 
 
@@ -14,7 +14,7 @@ Responses are then parsed and then passed to [AppDynamics](https://www.appdynami
 
 1. Java JRE 1.8 or above
 
-2. (Optional) AWS Account with access to an AMP Wokspaces - only required if accessing AMP
+2. (Optional) AWS IAM Role with access to an AMP Workspace - only required if accessing AMP
 
 3. AppDynamics controller with appropriate Analytics licence.
 
