@@ -45,8 +45,6 @@ controllerGlobalAccount: ""
 prometheusUrl: "https://aps-workspaces.us-west-2.amazonaws.com/workspaces/ws-xxxx-yyy-xxxx-yyy/api/v1/query"
 authenticationMode: "awssigv4"    # options are ( none | awssigv4 )
 awsRegion: "us-west-2"            # mandatory if authenticationMode = awssigv4
-awsAccessKey: ""                  # mandatory if authenticationMode = awssigv4
-awsSecretKey: ""                  # mandatory if authenticationMode = awssigv4
 
 
 # events sources configuration
@@ -67,8 +65,6 @@ controllerGlobalAccount | Account name to connect to the AppDynamics controller.
 prometheusUrl | The URL of your Prometheus deployment | `http://localhost:9090/api/v1/query`
 authenticationMode | The authentication mode needed to connect to the Prometheus deployment. The options are `none` or `awssigv4` | `none`
 awsRegion | The AWS region where your AMP workspace is located (optional if `authenticationMode` is not set to `awssigv4`) | (blank)
-awsAccessKey | The access key for the AWS IAM user with access to the AMP workspace (optional if `authenticationMode` is not set to `awssigv4`) | (blank)
-awsSecretKey | The secret key for the AWS IAM user with access to the AMP workspace (optional if `authenticationMode` is not set to `awssigv4`) | (blank)
 analyticsEventsSources | The list of sources that define the PromQL queries and their associated schema where the metrics from the queries will be published to | one source for `prom_node_metrics` and one for `prom_kubelet_metrics`
 
 ### Configure event sources for extension
