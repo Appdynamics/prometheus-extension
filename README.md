@@ -153,7 +153,7 @@ Once you have added your queries you should ensure that your schema config match
 
 ### Configure AWS IAM Role for AMP
 
-If you use `awssigv4` as the `authenticationMode` in the `./conf/config.yaml` file to connect to an AWS AMP Workspace, you will need to add the following [policy or the equivalent permissions](https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AmazonPrometheusQueryAccess$jsonEditor) to the IAM Role used to run this extension (i.e. the IAM Role associated with the EC2 instance running the extension).
+If you use `awssigv4` as the `authenticationMode` in the `./conf/config.yaml` file to connect to an AWS AMP Workspace, you will need to add the following [policy or the equivalent permissions](https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AmazonPrometheusQueryAccess$jsonEditor) to the IAM Role used to run this extension (e.g. the IAM Role associated with the EC2 instance running the extension).
 
 ```
 {
