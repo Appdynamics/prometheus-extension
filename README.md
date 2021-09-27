@@ -151,6 +151,29 @@ The three default queries in this file are listed above. You can add and change 
 
 Once you have added your queries you should ensure that your schema config matches the data that Prometheus will return (using the schema definition guidelines mentioned earlier). Failure to do this will cause an error at runtime.
 
+### Configure AWS IAM Role for AMP
+
+If you use `awssigv4` as the `authenticationMode` in the `./conf/config.yaml` file to connect to an AWS AMP Workspace, you will need to add the following [policy or the equivalent permissions](https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AmazonPrometheusQueryAccess$jsonEditor) to the IAM Role used to run this extension (i.e. the IAM Role associated with the EC2 instance running the extension).
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "aps:GetLabels",
+                "aps:GetMetricMetadata",
+                "aps:GetSeries",
+                "aps:QueryMetrics"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+
 
 ## Run Extension
 
