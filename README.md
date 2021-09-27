@@ -65,7 +65,7 @@ controllerGlobalAccount | Account name to connect to the AppDynamics controller.
 prometheusUrl | The URL of your Prometheus deployment | `http://localhost:9090/api/v1/query`
 authenticationMode | The authentication mode needed to connect to the Prometheus deployment. The options are `none` or `awssigv4` | `none`
 awsRegion | The AWS region where your AMP workspace is located (optional if `authenticationMode` is not set to `awssigv4`) | (blank)
-analyticsEventsSources | The list of sources that define the PromQL queries and their associated schema where the metrics from the queries will be published to | one source for `prom_node_metrics` and one for `prom_kubelet_metrics`
+analyticsEventsSources | The list of sources that define the PromQL queries and their associated schema within AppDynamics where the metrics from the queries will be published to | one source for `prom_node_metrics` and one for `prom_kubelet_metrics`
 
 ### Configure event sources for extension
 

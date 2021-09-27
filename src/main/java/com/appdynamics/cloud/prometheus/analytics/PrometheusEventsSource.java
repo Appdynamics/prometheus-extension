@@ -20,14 +20,11 @@ import org.apache.http.impl.client.HttpClients;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.BasicSessionCredentials;
 import com.amazonaws.util.EC2MetadataUtils;
 import com.amazonaws.util.EC2MetadataUtils.IAMSecurityCredential;
 import com.appdynamics.cloud.prometheus.ApplicationConstants;
 import com.appdynamics.cloud.prometheus.Logger;
 import com.appdynamics.cloud.prometheus.awssigv4.Sigv4Client;
-import com.appdynamics.cloud.prometheus.awssigv4.TestClient;
 import com.appdynamics.cloud.prometheus.config.AnalyticsEventsSourceConfig;
 import com.appdynamics.cloud.prometheus.config.ServiceConfig;
 import com.appdynamics.cloud.prometheus.utils.StringUtils;
@@ -45,7 +42,7 @@ public class PrometheusEventsSource implements AnalyticsEventsSource, Applicatio
 	private static Logger logr;
 	
 	private Map<String, IAMSecurityCredential> awsCreds = null;
-	private AWSCredentials awsCredentials = null;
+	//private AWSCredentials awsCredentials = null;
 	private IAMSecurityCredential awsIamCredential = null;
 	
 	/**
@@ -99,22 +96,15 @@ public class PrometheusEventsSource implements AnalyticsEventsSource, Applicatio
 		    
 		    Set<String> credKeys = this.awsCreds.keySet();
 		    
-		    logr.carriageReturnInfo();
-		    logr.carriageReturnInfo();
+
+		    logr.carriageReturnDebug();
 		    for (String credKey : credKeys) {
-		    	logr.info("AWS Role = " + credKey);
+		    	
+		    	logr.debug("AWS Role = " + credKey);
+
 		    	awsIamCredential = this.awsCreds.get(credKey);
 		    	
-		    	logr.info("AWS Access Key = '" + awsIamCredential.accessKeyId + "'");
-		    	logr.info("AWS Secret Key = '" + awsIamCredential.secretAccessKey + "'");
-		    	logr.info("AWS Session Token = '" + awsIamCredential.token + "'");
-		    	
-		    	//awsCredentials = new BasicSessionCredentials(awsIamCredential.accessKeyId, awsIamCredential.secretAccessKey, awsIamCredential.token);
-		    	
-		    	logr.carriageReturnInfo();
 		    }
-		    logr.carriageReturnInfo();
-		    logr.carriageReturnInfo();
 			
 		}
 		
@@ -325,12 +315,13 @@ public class PrometheusEventsSource implements AnalyticsEventsSource, Applicatio
 	    
 	    
 	    
-    	logr.info("AWS Access Key = '" + this.awsIamCredential.accessKeyId + "'");
-    	logr.info("AWS Secret Key = '" + this.awsIamCredential.secretAccessKey + "'");
-    	logr.info("AWS Session Token = '" + this.awsIamCredential.token + "'");
+    	//logr.info("AWS Access Key = '" + this.awsIamCredential.accessKeyId + "'");
+    	//logr.info("AWS Secret Key = '" + this.awsIamCredential.secretAccessKey + "'");
+    	//logr.info("AWS Session Token = '" + this.awsIamCredential.token + "'");
+	    
+	    
 		return Sigv4Client.processRequest(restEndpoint, this.serviceConfig.getAwsRegion(), this.awsIamCredential.accessKeyId, this.awsIamCredential.secretAccessKey, this.awsIamCredential.token, queryParameters);
 		 
-		// awsCredentials
 	    
 	   // return TestClient.processRequest(restEndpoint, this.serviceConfig.getAwsRegion(), this.awsCredentials);
 	    

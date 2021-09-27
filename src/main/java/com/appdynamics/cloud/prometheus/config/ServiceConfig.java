@@ -18,8 +18,8 @@ public class ServiceConfig {
     private String prometheusUrl;
     private String authenticationMode;
     private String awsRegion;
-    private String awsAccessKey;
-    private String awsSecretKey;
+    //private String awsAccessKey;
+    //private String awsSecretKey;
 	
 	private List<AnalyticsEventsSourceConfig> analyticsEventsSources;
 	
@@ -105,24 +105,24 @@ public class ServiceConfig {
 	}
 
 
-	public String getAwsAccessKey() {
-		return awsAccessKey;
-	}
-
-
-	public void setAwsAccessKey(String awsAccessKey) {
-		this.awsAccessKey = awsAccessKey;
-	}
-
-
-	public String getAwsSecretKey() {
-		return awsSecretKey;
-	}
-
-
-	public void setAwsSecretKey(String awsSecretKey) {
-		this.awsSecretKey = awsSecretKey;
-	}
+//	public String getAwsAccessKey() {
+//		return awsAccessKey;
+//	}
+//
+//
+//	public void setAwsAccessKey(String awsAccessKey) {
+//		this.awsAccessKey = awsAccessKey;
+//	}
+//
+//
+//	public String getAwsSecretKey() {
+//		return awsSecretKey;
+//	}
+//
+//
+//	public void setAwsSecretKey(String awsSecretKey) {
+//		this.awsSecretKey = awsSecretKey;
+//	}
 
 
 	public List<AnalyticsEventsSourceConfig> getAnalyticsEventsSources() {
