@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This extension connects to a Prometheus endpoint and runs the specified queries.
+This extension connects to a Prometheus endpoint and runs the specified `PromQL` queries.
 Responses are then parsed and then passed to [AppDynamics](https://www.appdynamics.com) as analytics events.
 [Amazon Managed Service for Prometheus (AMP)](https://us-west-2.console.aws.amazon.com/prometheus/home)  is supported using the [AWS Signature Version 4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) signing process.
 
