@@ -1,0 +1,6 @@
+metric_name,string
+instance,string
+job,string
+unit,string
+kubernetes_node,string
+metric_value,float

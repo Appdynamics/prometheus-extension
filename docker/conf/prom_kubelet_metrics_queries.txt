@@ -1,0 +1,3 @@
+kubelet_docker_operations_duration_seconds_bucket
+kubelet_http_inflight_requests
+kubelet_pod_start_duration_seconds_bucket
