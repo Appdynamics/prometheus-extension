@@ -7,6 +7,7 @@ controllerGlobalAccount: ""
 prometheusUrl: "http://localhost:9090/api/v1/query"
 authenticationMode: "none"    # options are ( none | awssigv4 )
 awsRegion: ""            # mandatory if authenticationMode = awssigv4
+bearerToken: ""
   
 analyticsEventsSources:
   - schemaName: "prom_node_metrics"

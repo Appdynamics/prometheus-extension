@@ -18,6 +18,7 @@ public class ServiceConfig {
     private String prometheusUrl;
     private String authenticationMode;
     private String awsRegion;
+	private String bearerToken;
     //private String awsAccessKey;
     //private String awsSecretKey;
 	
@@ -102,6 +103,15 @@ public class ServiceConfig {
 
 	public void setAwsRegion(String awsRegion) {
 		this.awsRegion = awsRegion;
+	}
+
+	public String getBearerToken() {
+		return bearerToken;
+	}
+
+
+	public void setBearerToken(String bearerToken) {
+		this.bearerToken = bearerToken;
 	}
 
 

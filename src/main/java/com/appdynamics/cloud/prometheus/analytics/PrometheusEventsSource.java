@@ -247,14 +247,18 @@ public class PrometheusEventsSource implements AnalyticsEventsSource, Applicatio
 		}
 		
 		switch (authMode) {
-		
-		case AUTH_MODE_AWSSIGV4:
-			queryResults = this.executePromQueryWithAwsSigv4(promQl);
-			break;
+			
+			case AUTH_MODE_AWSSIGV4:
+				queryResults = this.executePromQueryWithAwsSigv4(promQl);
+				break;
 
-		default:
-			queryResults = this.executePromQueryWithNoAuth(promQl);
-			break;
+			case AUTH_MODE_BEARER_TOKEN:
+				queryResults = this.executePromQueryWithBearerToken(promQl);
+				break;
+
+			default:
+				queryResults = this.executePromQueryWithNoAuth(promQl);
+				break;
 		}
 		
 		
@@ -277,6 +281,44 @@ public class PrometheusEventsSource implements AnalyticsEventsSource, Applicatio
 	    CloseableHttpResponse response = client.execute(request);
 		
 	    logr.trace(" - Executing Query with No Auth");
+	    logr.trace(" - Query: " + promQl + " : HTTP Status: " + response.getStatusLine().getStatusCode());
+	    
+		String resp = "";
+        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        StringBuilder out = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            out.append(line);
+        }			
+		
+        resp = out.toString();
+		reader.close();
+		
+		logr.trace(" - Query Response");
+		logr.trace(resp);
+
+		HttpClientUtils.closeQuietly(response);
+		HttpClientUtils.closeQuietly(client);
+				
+		
+		return resp;
+	}
+
+	private String executePromQueryWithBearerToken(String promQl) throws Throwable {
+		
+		String restEndpoint = this.constructEndpointQuery(promQl);	
+		
+		CloseableHttpClient client = HttpClients.createDefault();
+		
+		HttpGet request = new HttpGet(restEndpoint);
+
+		request.addHeader("Accept", "application/json, text/plain, */*");
+		request.addHeader("Authorization", "Bearer " + this.serviceConfig.getBearerToken());
+		//request.addHeader("Accept", "application/vnd.appd.events+json;v=2");
+
+	    CloseableHttpResponse response = client.execute(request);
+		
+	    logr.trace(" - Executing Query with Bearer Token Auth");
 	    logr.trace(" - Query: " + promQl + " : HTTP Status: " + response.getStatusLine().getStatusCode());
 	    
 		String resp = "";
