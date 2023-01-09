@@ -15,5 +15,6 @@ public interface ApplicationConstants {
 	
 	public static final String AUTH_MODE_NONE = "none";
 	public static final String AUTH_MODE_AWSSIGV4 = "awssigv4";
+	public static final String AUTH_MODE_BEARER_TOKEN = "bearer";
 	
 }

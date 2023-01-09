@@ -16,6 +16,8 @@ Responses are then parsed and then passed to [AppDynamics](https://www.appdynami
 
 2. (Optional) AWS IAM Role with access to an AMP Workspace - only required if accessing AMP
 
+4. (Optional) Authentication bearer token - only required if accessing with bearer token
+
 3. AppDynamics controller with appropriate Analytics licence.
 
 
@@ -45,7 +47,7 @@ controllerGlobalAccount: ""
 prometheusUrl: "https://aps-workspaces.us-west-2.amazonaws.com/workspaces/ws-xxxx-yyy-xxxx-yyy/api/v1/query"
 authenticationMode: "awssigv4"    # options are ( none | awssigv4 )
 awsRegion: "us-west-2"            # mandatory if authenticationMode = awssigv4
-
+bearerToken: ""
 
 # events sources configuration
 
@@ -63,8 +65,9 @@ eventsServiceEndpoint | URL to connect to the AppDynamics controller events serv
 eventsServiceApikey | API Key to connect to AppDynamics controller events service. See [our documentation](https://docs.appdynamics.com/display/PRO45/Managing+API+Keys) to create an API key. | (blank)
 controllerGlobalAccount | Account name to connect to the AppDynamics controller. See Settings > License > Account for the value for your controller | (blank)
 prometheusUrl | The URL of your Prometheus deployment | `http://localhost:9090/api/v1/query`
-authenticationMode | The authentication mode needed to connect to the Prometheus deployment. The options are `none` or `awssigv4` | `none`
+authenticationMode | The authentication mode needed to connect to the Prometheus deployment. The options are `none`,  `awssigv4`, or `bearer` | `none`
 awsRegion | The AWS region where your AMP workspace is located (optional if `authenticationMode` is not set to `awssigv4`) | (blank)
+bearerToken | The authentication/authorization bearer token to send with the request (optional if `authenticationMode` is not set to `bearer`) | (blank)
 analyticsEventsSources | The list of sources that define the PromQL queries and their associated schema within AppDynamics where the metrics from the queries will be published to | one source for `prom_node_metrics` and one for `prom_kubelet_metrics`
 
 ### Configure event sources for extension
